@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define ProductName = "DataMagnet"?>
+  <?define ProductCode = "*"?>
+  <?define UpgradeCode = "78c00191-7938-41e6-8fc9-4fa7d1670c6e"?>
+  <?define ProductVersion = "1.0.0.1"?>
+  <?define RTMProductVersion = "1.0.0.0"?>
+  <Product Id="$(var.ProductCode)" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="VRoDLooP" UpgradeCode="$(var.UpgradeCode)">
+    <Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <Upgrade Id='$(var.UpgradeCode)'>
+      <UpgradeVersion Minimum='$(var.ProductVersion)'
+                      OnlyDetect='yes'
+                      IncludeMinimum='no'
+                      Property='NEWPRODUCTFOUND' />
+      <UpgradeVersion Minimum='$(var.RTMProductVersion)'
+                      IncludeMinimum='yes'
+                      Maximum='$(var.ProductVersion)'
+                      IncludeMaximum='yes'
+                      Property='UPGRADEFOUND' />
+    </Upgrade>
+
+    <InstallExecuteSequence>
+
+      <Custom Action='PreventDowngrading'
+              After='FindRelatedProducts'>NEWPRODUCTFOUND</Custom>
+      <RemoveExistingProducts After='InstallFinalize' />
+      <Custom Action="DeleteLogFile" After="InstallFinalize"
+           >REMOVE="ALL"</Custom>
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action='PreventDowngrading'
+              After='FindRelatedProducts'>NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
+
+    <CustomAction Id='PreventDowngrading'
+                  Error='Newer version already installed' />
+<Binary Id="IVMS_CustomAction.CA.dll"
+       src="..\..\..\MultiportReports_CustomAction\obj\x86\Release\MultiportReports_CustomAction.CA.dll" />
+
+    <CustomAction Id="DeleteLogFile"
+        Return="check"
+          Execute="immediate"
+          BinaryKey="IVMS_CustomAction.CA.dll"
+          DllEntry="DeleteLogFile"
+    />
+    <UI>
+      <Publish Dialog="WelcomeDlg"
+               Control="Next"
+               Event="NewDialog"
+               Value="InstallDirDlg"
+               Order="5">1</Publish>
+
+      <Publish Dialog="InstallDirDlg"
+               Control="Back"
+               Event="NewDialog"
+               Value="WelcomeDlg"
+               Order="5">1</Publish>
+    </UI>
+
+    <MediaTemplate EmbedCab="yes"/>
+    <Icon Id="ProductIcon" SourceFile="..\..\..\MultiportReports\images\Icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
+    <CustomAction Id="SetLaunchApplicationTarget" Property="WixShellExecTarget" Value="[#FILE_Multiport.exe]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="no" />
+
+    <UI Id="LaunchApplication">
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="SetLaunchApplicationTarget">
+        <![CDATA[NOT Installed]]>
+      </Publish>
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication" >
+        <![CDATA[NOT Installed]]>
+      </Publish>
+    </UI>
+    <Feature Id="ProductFeature" Title="Multiport" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="ProductMenuComponents" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
+      <ComponentRef Id="CleanupMainApplicationFolder" />
+    </Feature>
+    <Property Id="APPLICATIONFOLDER" Secure="yes">
+      <RegistrySearch Id="APPLICATIONFOLDER_REGSEARCH"
+			 Root="HKCU"
+			       Key="Software\VRoDLooP\DataMagnet" Type="raw"  Name="Path" />
+    </Property>
+
+  </Product>
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="DataMagnet" >
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="DataMagnet"/>
+
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop"></Directory>
+      <Directory Id="APPLICATIONFOLDER">
+
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="CMP_Swiss" Guid="{B528006C-80C7-4F47-B024-5B85B528ACC4}">
+
+        <File Id="FILE_Multiport.exe" Source="..\..\..\MultiportReports\bin\Release\DataMagnet.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="Log4netdll" Guid="{4CDBC01C-9054-4AC4-AD43-6B4EB796F80E}" >
+        <File Id="FlLog4netdll" Source="..\..\..\MultiportReports\bin\Release\log4net.dll" KeyPath="yes"></File>
+      </Component>
+      <Component Id="Log4NetConfig" Guid="{13015423-CC9D-4288-B2B1-EADA7C4B4401}">
+        <File Id="FLog4NetConfig" Source="..\..\..\MultiportReports\log4net.config" KeyPath="yes"></File>
+      </Component>
+
+      <Component Id="LiveCharts" Guid="{5D918588-B7AA-4F85-9556-E308D222593E}" >
+        <File Id="LiveCharts" Source="..\..\..\MultiportReports\bin\Release\LiveCharts.dll" KeyPath="yes"></File>
+      </Component>
+      <Component Id="LiveCharts.Wpfdll" Guid="{9F249ED6-C455-4829-BE94-11C67DF8ECD2}" >
+        <File Id="FLiveCharts.Wpfdll" Source="..\..\..\MultiportReports\bin\Release\LiveCharts.Wpf.dll" KeyPath="yes"></File>
+      </Component>
+        <Component Id="SecureAppdll" Guid="{3FA6FED8-F397-4F08-855E-1FD23137FEFB}" >
+        <File Id="FSecureAppdll" Source="..\..\..\MultiportReports\bin\Release\SecureApp.dll" KeyPath="yes"></File>
+      </Component>
+      <Component Id="ToggleSwitchdll" Guid="{9415ABAF-EFC2-421D-9AE4-A4104DB94F32}" >
+        <File Id="FToggleSwitchdll" Source="..\..\..\MultiportReports\bin\Release\ToggleSwitch.dll" KeyPath="yes"></File>
+      </Component>
+       <Component Id="MultiSelectComboBoxdll" Guid="{57ACE8FC-CBDB-4FD8-8B9C-5EA4A80DAB6A}" >
+        <File Id="FMultiSelectComboBoxdll" Source="..\..\..\MultiportReports\bin\Release\MultiSelectComboBox.dll" KeyPath="yes"></File>
+      </Component>
+       <Component Id="MySql.Datadll" Guid="{1C84AC1C-57B0-4DE6-AA2E-FF804E4C9C75}" >
+        <File Id="FMySql.Datadll" Source="..\..\..\MultiportReports\bin\Release\MySql.Data.dll" KeyPath="yes"></File>
+      </Component>
+       <Component Id="System.Windows.Controls.DataVisualization.Toolkitdll" Guid="{9321CF99-8411-4B09-AF4F-F59F161068B7}" >
+        <File Id="FSystem.Windows.Controls.DataVisualization.Toolkitdll" Source="..\..\..\MultiportReports\bin\Release\System.Windows.Controls.DataVisualization.Toolkit.dll" KeyPath="yes"></File>
+      </Component>
+      <Component Id="App.config" Guid="{BB794713-ACC5-40B4-84F7-1766A052FE92}" >
+        <File Id="FApp.config" Source="..\..\..\MultiportReports\bin\Release\DataMagnet.exe.config" KeyPath="yes"></File>
+      </Component>
+
+    </ComponentGroup>
+
+    <ComponentGroup Id="ProductMenuComponents" Directory="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="{0926DF77-E04C-45F9-AE2A-F0F67E24CFD6}" >
+        <Shortcut
+            Id="ApplicationStartMenuShortcut"
+            Name="Multiport"
+            Description="Multiport"
+            Target="[#FILE_Multiport.exe]"
+            WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue
+            Root="HKCU"
+            Key="Software\VRoDLooP\DataMagnet"
+            Name="-" Type="integer" Value="1"
+            KeyPath="yes" />
+        <RegistryKey
+             Root="HKCU"
+             Key="Software\VRoDLooP\DataMagnet" />
+
+      </Component>
+    </ComponentGroup>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop" Guid="{EE8BC8BB-68C2-4DF0-935A-5F00BD25AB7D}">
+        <Shortcut Id="ApplicationDesktopShortcut" Name="DataMagnet" Target="[#FILE_Multiport.exe]" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+        <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
+        <RegistryValue Root="HKCU"   Key="Software\VRoDLooP\DataMagnet" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <Component Id="CleanupMainApplicationFolder" Guid="{ECDDFFEE-9C2E-4668-8617-0234A1E28781}">
+        <RegistryValue Root="HKCU"   Key="Software\VRoDLooP\DataMagnet" Name="Path" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
+        <!-- We need to use APPLICATIONFOLDER variable here or RemoveFolderEx will not remove on "uninstall". -->
+        <util:RemoveFolderEx On="uninstall" Property="APPLICATIONFOLDER"  />
+        <CreateFolder/>
+      </Component>
+    </DirectoryRef>
+
+
+  </Fragment>
+</Wix>

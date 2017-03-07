@@ -1,0 +1,34 @@
+﻿<Window x:Class="DataMagnetApp.LogIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataMagnetApp"
+        mc:Ignorable="d"
+        Title="LogIn" Height="360" Width="680" BorderThickness="1" BorderBrush="#00416a"  WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded" ResizeMode="CanMinimize" >
+    <Grid>
+        <Grid Name="GridLogIn" Visibility="Visible" IsEnabled="False" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="680" Margin="0,0,0,-130">
+            <Border BorderThickness="1" BorderBrush="#00416a" Height="10" VerticalAlignment="Top">
+                <Grid Name="TitleGrid" VerticalAlignment="Top" Background="#00416a" Height="10" Margin="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                </Grid>
+            </Border>
+            <Label x:Name="lbTitle" HorizontalAlignment="Left" Content="Log In" FontFamily="Verdana" FontSize="18" Margin="10,14,0,0" FontWeight="Bold" Width="142" Height="37" VerticalAlignment="Top"/>
+            <Button x:Name="btnDmin" TabIndex="7" Content="-" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="18" Height="22" Click="btnmin_Click" Margin="0,15,33,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+            <Button x:Name="btnDclose" TabIndex="7" Content="X" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="18" Height="22" Click="btnclose_Click" Margin="0,14,10,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+
+            <Button x:Name="btnLogIn" IsDefault="True" Style="{StaticResource RoundButtonBlueTemplate}" Content="Log In" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="514,273,0,0" FontWeight="Bold" FontFamily="Verdana" Height="36" RenderTransformOrigin="0,0" Click="ButtonLogIn_Click"/>
+            <Label x:Name="lblUserName" Content="User Name" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.025,3.628" Margin="91,155,0,0" FontSize="18" FontFamily="Verdana"/>
+            <Label x:Name="lblUserType" Content="User Type" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.025,3.628" Margin="92,104,0,0" FontSize="18" FontFamily="Verdana"/>
+            <Label x:Name="lblPassword" Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.025,3.628" Margin="92,210,0,0" FontSize="18" FontFamily="Verdana"/>
+            <TextBox x:Name="txtUserName" Text="admin"  VerticalContentAlignment="Center" TabIndex="1" MaxLength="15"  Style="{StaticResource styleUsername}" Padding="2,0,2,2" Height="29" TextWrapping="Wrap" VerticalAlignment="Top" Margin="250,155,168,0" FontSize="18" FontFamily="Verdana" />
+            <PasswordBox x:Name="txtPassword" Password="vikash" TabIndex="2" MaxLength="15" Style="{StaticResource mystylePassword}" Padding="2,0,2,2" Height="29"  VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="250,210,168,0" FontSize="18" FontFamily="Verdana"/>
+            <Label x:Name="lblUserNameTooltip"  Visibility="Hidden" Foreground="#00416a" Content="*" VerticalAlignment="Top" RenderTransformOrigin="2.025,3.628" Margin="550,91,108,0" FontSize="17" FontFamily="Verdana" Height="22"/>
+            <Label x:Name="lblPasswordTooltip"   Visibility="Hidden" Foreground="#00416a" Content="*" VerticalAlignment="Top" RenderTransformOrigin="2.025,3.628" Margin="549,147,109,0" FontSize="17" FontFamily="Verdana" Height="22"/>
+            <ComboBox Style="{StaticResource RoundComboTemplate}" FontSize="16" TabIndex="0" Name="cbUserType" Height="30" Margin="250,104,168,226">
+                <ComboBoxItem>Select</ComboBoxItem>
+                <ComboBoxItem  Selector.IsSelected="True">Admin</ComboBoxItem>
+                <ComboBoxItem>User</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+    </Grid>
+</Window>

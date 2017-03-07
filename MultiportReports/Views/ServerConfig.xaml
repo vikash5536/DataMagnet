@@ -1,0 +1,425 @@
+﻿<Window x:Class="DataMagnetApp.ServerConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local ="clr-namespace:DataMagnetApp"
+          xmlns:toggleSwitch="clr-namespace:ToggleSwitch;assembly=ToggleSwitch"
+        xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        Title="ServerConfig" BorderBrush="Gray" BorderThickness="1" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ResizeMode="CanMinimize" WindowStyle="None"  Height="550" Width="1000" >
+
+    <Grid HorizontalAlignment="Left" Height="550" MouseLeftButtonDown="Grid_MouseLeftButtonDown"  Width="1000" Margin="0,0,0,0" VerticalAlignment="Top">
+        <Rectangle Fill="#34495E" HorizontalAlignment="Left" Height="39" Stroke="#FFABADB3" VerticalAlignment="Top" Width="1000" />
+        <Rectangle Fill="#34495E" HorizontalAlignment="Right" Height="20" VerticalAlignment="Bottom" Stroke="#FFABADB3" Width="1000" />
+        <Label x:Name="lblDFooter" Content="ABC Pvt Ltd" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.711,0.4" Height="20" Margin="911,528,0,0" FontFamily="Verdana" FontSize="10" FontWeight="Bold"/>
+        <Image x:Name="iconDImage" HorizontalAlignment="Left" Source="/images/networking.png" Height="26" VerticalAlignment="Top" Width="39" Margin="6,6,0,0" RenderTransformOrigin="1.591,0.42"/>
+        <Label x:Name="lblDTitle" Foreground ="White" Content="Multiport - Server1" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="3.135,1.48" Height="36" Margin="37,4,0,0" FontFamily="Verdana" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnDmin" Style="{StaticResource RoundTitleButtonTemplate}" Foreground="#34495E" Content="-" HorizontalAlignment="Right" Width="28" Height="26" FontSize="21.33" FontFamily="Arial Black" BorderBrush="White" FontWeight="Bold" Padding="2,2,2,2" Margin="0,6,92,518" Click="btnDmin_Click" />
+        <Button x:Name="btnDback" Style="{StaticResource RoundTitleButtonTemplate}" Foreground="#34495E" Content="&lt;" HorizontalAlignment="Right" Width="28" Height="26" FontSize="21.33" FontFamily="Arial Black" BorderBrush="White" FontWeight="Bold" Padding="2,2,2,2" Margin="0,6,51,518" Click="btnDback_Click" />
+        <Button x:Name="btnDclose" Content="X" Style="{StaticResource RoundTitleButtonTemplate}" Foreground="#34495E" VerticalAlignment="Top" Width="28" Height="26" FontSize="14" BorderBrush="White" FontFamily="Arial Black" HorizontalAlignment="Right" FontWeight="Bold" Margin="0,6,13,0" Click="btnDclose_Click">
+        </Button>
+
+        <Grid x:Name="MainGrid" Visibility="Visible" Background="White" Height="491" VerticalAlignment="Top" Margin="0,39,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="183*"/>
+                <ColumnDefinition Width="707*"/>
+                <ColumnDefinition Width="110*"/>
+            </Grid.ColumnDefinitions>
+            <TabControl  x:Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged" Padding="0,0,0,0" TabStripPlacement="Left" Grid.ColumnSpan="3" Margin="-2,-2,2,2" >
+                <TabItem Style="{StaticResource DashboardSideBarStyle}" Name="TabDashboard" HorizontalAlignment="Left">
+                    <TabItem.Header>
+                        <TextBlock Name="TextBlockDashboard" Foreground="White" Text="Dashboard" FontSize="20" FontWeight="Bold" Width="104" RenderTransformOrigin="1.131,0.374" />
+                    </TabItem.Header>
+                    <Grid Name="GridServerIcon" Visibility="Visible" Margin="1,81,-1,80">
+
+                        <Button  Visibility="Visible" Style="{StaticResource CircleServersGrayButtonTemplate}" Height="96" Width="96" Click="btnServer1_Click" Name="btnServer1" Margin="119,40,601,192" >
+                            <Image Source="/Images/weighing-scale-w.png"  Height="48" Width="48">
+                                <ContextMenuService.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Name="CMMachineStart1" Header="Start" Click="CMMachineStart1_Click">
+                                            <MenuItem.Icon>
+                                                <Image Source="/Images/playnormal.ico" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Name="CMMachineStop1" Click="CMMachineStop1_Click" Header="Stop">
+                                            <MenuItem.Icon>
+                                                <Image Source="/Images/stopnormal.ico" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </ContextMenuService.ContextMenu>
+                            </Image>
+                        </Button>
+
+                        <Button  Visibility="Hidden"  Style="{StaticResource CircleServersGrayButtonTemplate}" Click="btnServer2_Click"  Name="btnServer2"  Height="96" Width="96" Margin="361,38,359,194">
+                            <Image Source="/Images/weighing-scale-w.png"  Height="48" Width="48"/>
+                        </Button>
+                        <Button Visibility="Hidden" Style="{StaticResource CircleServersGrayButtonTemplate}"  Height="96" Width="96" Click="btnServer3_Click" Name="btnServer3" Margin="600,35,116,190">
+                            <Image Source="/Images/weighing-scale-w.png"  Height="48" Width="48"/>
+                        </Button>
+                        <Button Visibility="Hidden" Style="{StaticResource CircleServersGrayButtonTemplate}" Height="96" Click="btnServer4_Click"  Width="96" Name="btnServer4" Margin="119,216,601,16">
+                            <Image Source="/Images/weighing-scale-w.png"  Height="48" Width="48"/>
+                        </Button>
+                        <Button Visibility="Hidden" Style="{StaticResource CircleServersGrayButtonTemplate}" Width="96"  Click="btnServer5_Click" Name="btnServer5"  Height="96" Margin="361,216,359,16" >
+                            <Image Source="/Images/weighing-scale-w.png"  Height="48" Width="48"/>
+                        </Button>
+                    </Grid>
+                </TabItem>
+                <TabItem  Name="TabAddMachine" Style="{StaticResource DashboardSideBarStyle}" HorizontalAlignment="Left" Margin="0,0,0,0">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Width="161">
+                            <Image Source="/Images/newuserSmall.png" Width="18" Height="18"  HorizontalAlignment="Left" Margin="0,0,30,0" />
+                            <TextBlock Name="TBServer" Text="Add Machine"  Width="85" RenderTransformOrigin="1.131,0.374" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Name="GridServers" Visibility="Visible">
+                        <Line  X1="100" Y1="50" X2="367" Y2="50" Stroke="Black" Grid.ColumnSpan="2" ></Line>
+                        <Line  X1="404" Y1="50" X2="718" Y2="50" Stroke="Black" Grid.ColumnSpan="2" ></Line>
+                        <Image Height="41" Name="FinalImage" Source="/Images/circleGray.png" VerticalAlignment="Top" Margin="713,28,54,0" />
+                        <Image HorizontalAlignment="Left" Name="MiddleImage" Height="41" Source="/images/circleGray.png" VerticalAlignment="Top" Margin="365,28,40,0" />
+                        <Button x:Name="btnAddServer" Style="{StaticResource SliderBlueTemplate}" Width="41"  Content="+" FontSize="30" BorderThickness="0" BorderBrush="White" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="-0.428,-1.532" Height="41" Click="btnAddServer_Click" Margin="59,28,0,0" >
+                            <!--<Image Source="images/man.png"  RenderTransformOrigin="1.213,0.461" ></Image>-->
+                        </Button>
+                        <Label HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="86" Content="Add Server" Margin="42,74,0,0" RenderTransformOrigin="0.018,0.613"/>
+                        <Label HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="163" Content="Machine Configuration" Margin="317,69,0,0"/>
+                        <Label HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="122" Content="Server Configured" Margin="668,72,0,0"/>
+                        <Grid Name="GridAddServer" Visibility="Hidden" >
+                            <Button Name="btnAddMachineNext" Click="btnAddMachineNext_Click" Content="Next"  HorizontalAlignment="Left" Style="{StaticResource RoundButtonGrayTemplate}" VerticalAlignment="Top" Width="105" Margin="674,439,0,0" Height="35" />
+                            <TextBox  x:Name="txtMachineName" Padding="5,5,5,5" BorderThickness="0" HorizontalAlignment="Left" Width="294" TabIndex="0" Height="36" Margin="331,124,0,0" Style="{StaticResource RoundTextboxTemplate}" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.395" />
+                            <Label Content="Machine Name" FontSize="19" FontWeight="Bold" Margin="106,124,497,329" RenderTransformOrigin="0.254,0.728"/>
+                            <Label Content="Machine Location" FontSize="19" FontWeight="Bold" Margin="106,184,449,269" RenderTransformOrigin="0.254,0.728"/>
+                            <TextBox  x:Name="txtMachineLocation" Padding="5,5,5,5" BorderThickness="0" HorizontalAlignment="Left" Width="294" TabIndex="0" Height="36" Margin="331,184,0,0" Style="{StaticResource RoundTextboxTemplate}" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.395"/>
+                            <Label Content="Product Name" FontSize="19" FontWeight="Bold" Margin="106,243,497,210" RenderTransformOrigin="0.254,0.728"/>
+                            <TextBox  x:Name="txtProductName" Padding="5,5,5,5" BorderThickness="0" HorizontalAlignment="Left" Width="294" TabIndex="0" Height="36" Margin="331,241,0,0" Style="{StaticResource RoundTextboxTemplate}" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.395"/>
+                            <Label Content="Supervisor Name" FontSize="19" FontWeight="Bold" Margin="106,300,472,153" RenderTransformOrigin="0.254,0.728"/>
+                            <TextBox  x:Name="txtSupervisorName" Padding="5,5,5,5" BorderThickness="0" HorizontalAlignment="Left" Width="294" TabIndex="0" Height="36" Margin="331,300,0,0" Style="{StaticResource RoundTextboxTemplate}" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.395"/>
+                            <Label Content="Email To" FontSize="19" FontWeight="Bold" Margin="106,358,472,95" RenderTransformOrigin="0.254,0.728"/>
+                            <TextBox  x:Name="txtEmailTo" Padding="5,5,5,5" BorderThickness="0" HorizontalAlignment="Left" Width="294" TabIndex="0" Height="36" Margin="331,358,0,0" Style="{StaticResource RoundTextboxTemplate}" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.395"/>
+                        </Grid>
+                        <Grid Name="GridOpenServer" Visibility="Hidden">
+                            <Line X1="100" Y1="50" X2="367" Y2="50" Stroke="Black" Grid.ColumnSpan="2" ></Line>
+                            <Line X1="404" Y1="50" X2="718" Y2="50" Stroke="Black" Grid.ColumnSpan="2" ></Line>
+                            <Image Name="imgOpenServerDark" HorizontalAlignment="Left" Height="41" Source="/Images/circleDrakGray.png" VerticalAlignment="Top" Margin="366,28,0,0" RenderTransformOrigin="8.792,-0.976"/>
+                            <Image Name="imgAddfinal" HorizontalAlignment="Left" Height="41" Source="/Images/circleConnected.png" Margin="59,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6.797,4.13" />
+                            <Grid Name="GridConTypeCom" Visibility="Visible" Margin="0,185,0,76">
+                                <Label Content="Machine COMPort" Height="36" FontSize="19" FontWeight="Bold" Margin="144,35,474,157"/>
+                                <ComboBox HorizontalAlignment="Left" Height="30" Style="{StaticResource RoundComboTemplate}" VerticalAlignment="Top" Name="cmbPorts" Width="130" Margin="355,39,0,0">
+                                </ComboBox>
+                                <Label Content="Port Boad Rate" Height="36" Width="150" FontSize="19" FontWeight="Bold" Margin="144,114,522,78" />
+                                <ComboBox HorizontalAlignment="Left" Height="30" Margin="355,118,0,0" Style="{StaticResource ResourceKey=RoundComboTemplate}" VerticalAlignment="Top" x:Name="cmbPorts_BoadRate" Width="130">
+                                    <ComboBoxItem IsSelected="True">9600</ComboBoxItem>
+                                    <ComboBoxItem>5600</ComboBoxItem>
+                                </ComboBox>
+                            </Grid>
+                            <Grid Name="GridConTypeTelnet" Visibility="Hidden" Margin="0,185,0,76">
+                                <Label Content="Machine IP" Height="36" Width="150" FontSize="19" FontWeight="Bold" Margin="144,35,522,157"/>
+                                <TextBox  x:Name="txtMachineIP" Padding="5,5,5,5" BorderThickness="0" HorizontalAlignment="Left" Width="294" TabIndex="0" Height="36" Style="{StaticResource RoundTextboxTemplate}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="349,35,0,0"/>
+                                <Label Content="Machine Port" Height="36" Width="150" FontSize="19" FontWeight="Bold" Margin="144,114,522,78" />
+                                <TextBox  x:Name="txtMachinePort" Padding="5,5,5,5" BorderThickness="0" HorizontalAlignment="Left" Width="294" TabIndex="0" Height="36" Style="{StaticResource RoundTextboxTemplate}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="349,114,0,0"/>
+                            </Grid>
+                            <RadioButton Name="rbCOMPort" FontSize="19" Height="30" IsChecked="True" TabIndex="0"  FontFamily="Verdana" GroupName="ConnectionType"  Margin="187,150,480,309" VerticalContentAlignment="top" Checked="rbCOMPort_Checked">COM Port</RadioButton>
+                            <RadioButton Name="rbTelnet" VerticalContentAlignment="Top"  TabIndex="1" Height="30"  FontFamily="Verdana" GroupName="ConnectionType" FontSize="19"  Margin="366,150,315,309" Checked="rbTelnet_Checked">Telnet</RadioButton>
+                            <Button Click="btnOpenMachineNext_Click" Name="btnOpenMachineNext" Content="Next" Style="{StaticResource RoundButtonGrayTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Margin="677,439,0,0" Height="35"/>
+                            <Button Click="btnOpenMachinePrevious_Click" Name="btnOpenMachinePrevious" Content="Previous" Style="{StaticResource RoundButtonGrayTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Margin="534,439,0,0" Height="35"/>
+                        </Grid>
+                        <Grid Name="GridConnectedServer" Visibility="Hidden">
+                            <Line X1="430" Y1="50" X2="716" Y2="50" Stroke="Black" ></Line>
+                            <Image Name="imgServerConfiguredDark" HorizontalAlignment="Left" Height="41" Source="/Images/circleDrakGray.png" Margin="716,28,0,0" VerticalAlignment="Top"/>
+                            <Image Name="imgServerConfiguredOK" Visibility="Hidden" HorizontalAlignment="Left" Height="41" Source="/Images/circleConnected.png" Margin="716,28,0,0" VerticalAlignment="Top"/>
+                            <Image Name="imgAddserverfinal" HorizontalAlignment="Left" Height="41" Source="/Images/circleConnected.png" Margin="58,28,0,0" VerticalAlignment="Top" />
+                            <Image Name="imgopenserverfinal" HorizontalAlignment="Left" Height="41" Source="/Images/circleConnected.png" Margin="366,28,0,0" VerticalAlignment="Top" />
+                            <Grid Margin="0,115,0,10">
+                                <Label Content="Machine Name" Height="36" FontSize="19" Margin="23,24,643,304"/>
+                                <Label Content="Machine Location" Height="36" FontSize="19"  Margin="23,90,622,238"/>
+                                <Label Content="Product Name" Height="36" Width="150" FontSize="19"  Margin="23,162,643,166"/>
+                                <Label Content="Supervisor Name" Height="36" FontSize="19"  Margin="23,230,622,98"/>
+                                <Label Name="lblMachineName" Content="sad" Height="36" FontSize="19" Margin="199,22,421,306"/>
+                                <Label Name="lblMachineLocation" Content="sad" Height="36" FontSize="19"  Margin="199,92,421,236"/>
+                                <Label Name="lblProductName" Content="sad" Height="36" FontSize="19"  Margin="199,166,421,162"/>
+                                <Label Name="lblSupervisorName" Content="sad" Height="36" FontSize="19"  Margin="199,230,421,98"/>
+                                <Label Content="EmailTo" Height="36" FontSize="19" Margin="386,24,280,304"/>
+                                <Label Content="Connection Type" Height="36" FontSize="19" Margin="386,92,280,236"/>
+                                <Label Content="IP/COM" Height="36" FontSize="19"  Margin="386,164,253,164"/>
+                                <Label Content="Port/BoadRate" Height="36" Width="150" FontSize="19"  Margin="386,230,280,98"/>
+                                <Label Name="lblEmailTo" Content="sad" Height="36" FontSize="19" Margin="571,24,10,304"/>
+                                <Label Name="lblMachineConType" Content="sad" Height="36" FontSize="19" Margin="571,94,76,234"/>
+                                <Label Name="lblMachineIP" Content="sad" Height="36" FontSize="19"  Margin="571,162,76,166"/>
+                                <Label Name="lblMachinePort" Content="sad" Height="36" FontSize="19"  Margin="571,230,76,98"/>
+                                <Button Click="btnAddMachinePre_Click" Name="btnAddMachinePre" Content="Back" Style="{StaticResource RoundButtonGrayTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"  Height="35" Margin="507,319,0,0"/>
+                                <Button Click="btnAddMachine_Click" Name="btnAddMachine" Content="Add Machine" Style="{StaticResource RoundButtonGrayTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"  Height="35" Margin="656,319,0,0"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem  Name="TabMachineList" Style="{StaticResource DashboardSideBarStyle}" HorizontalAlignment="Left" Margin="0,0,0,0">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Width="161">
+                            <Image Source="/Images/newuserSmall.png" Width="18" Height="18"  HorizontalAlignment="Left" Margin="0,0,30,0" />
+                            <TextBlock Name="TBMachineList" Text="Machine List"  Width="80" RenderTransformOrigin="1.131,0.374" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <Label Height="40" Width="172" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" Foreground="#34495E" Content="Telnet Servers" Margin="334,10,310,439"/>
+                        <Label Height="40" Width="172" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" Foreground="#34495E" Content="COM Servers" Margin="334,256,310,193"/>
+                        <DataGrid x:Name="dataGridTelnetMachineList" Visibility="Visible"  TextBlock.TextAlignment="Center" AutoGenerateColumns="False"   RowDetailsVisibilityMode="VisibleWhenSelected" Stylus.IsFlicksEnabled="False" IsReadOnly="True" Margin="16,71,22,257" CanUserSortColumns="False" Background="Transparent" HorizontalContentAlignment="Center" RowHeaderWidth="0" CanUserReorderColumns="False" EnableRowVirtualization="false" EnableColumnVirtualization="false" CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="Black">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Visibility="Hidden" Width="*" Header="Name" Binding="{Binding MachineId}" >
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" MinWidth="100"  Header="Name" Binding="{Binding MachineName}" >
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" MinWidth="90" Header="Location" Binding="{Binding MachineLocation}" >
+
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="ProductName" Width="*" MinWidth="100" Binding="{Binding ProductName}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="EmailTo" Width="*" MinWidth="160" Binding="{Binding EmailTo}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="MachineIP" Width="*" MinWidth="50" Binding="{Binding MachineIP}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Port" Width="*" MinWidth="20" Binding="{Binding MachinePort}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Header="Action" Width="*" MinWidth="10" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Width="70" Name="GridbtndltMachine" Height="20" FontFamily="verdana" Click="GridbtndlttelnetMachine_Click" Content="Delete" Style="{StaticResource LinkButton}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+
+
+
+
+
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background"  Value="#eee" />
+                                    <Setter Property="Margin" Value="-1,0,-1,0"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="BorderThickness" Value="1,0,0,1"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+
+                        </DataGrid>
+                        <DataGrid x:Name="dataGridComMachineList" ItemsSource="{Binding MachinesViewModel}"  Visibility="Visible"  TextBlock.TextAlignment="Center" AutoGenerateColumns="False"   RowDetailsVisibilityMode="VisibleWhenSelected" Stylus.IsFlicksEnabled="False" IsReadOnly="True" Margin="16,319,22,20" CanUserSortColumns="False" Background="Transparent" HorizontalContentAlignment="Center" RowHeaderWidth="0" CanUserReorderColumns="False" EnableRowVirtualization="false" EnableColumnVirtualization="false" CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="Black">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Visibility="Hidden" Width="*" Header="Name" Binding="{Binding MachineId}" >
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" MinWidth="100"  Header="Name" Binding="{Binding MachineName}" >
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" MinWidth="90" Header="Location" Binding="{Binding MachineLocation}" >
+
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="ProductName" Width="*" MinWidth="100" Binding="{Binding ProductName}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="EmailTo" Width="*" MinWidth="160" Binding="{Binding EmailTo}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Com Port" Width="*" MinWidth="50" Binding="{Binding COMPortName}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="BaudRate" Width="*" MinWidth="50" Binding="{Binding COMPortBoadRate}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"/>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Header="Action" Width="*" MinWidth="60" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Width="70" Name="GridbtndltComMachine" Height="20" FontFamily="verdana" Click="GridbtndltComMachine_Click" Content="Delete" Style="{StaticResource LinkButton}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+
+
+
+
+
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background"  Value="#eee" />
+                                    <Setter Property="Margin" Value="-1,0,-1,0"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="BorderThickness" Value="1,0,0,1"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Name="TabLiveView" Style="{StaticResource DashboardSideBarStyle}">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Width="159">
+                            <Image Source="/Images/avatar-w.png" Width="20" HorizontalAlignment="Left" Height="18" Margin="0,0,30,0"/>
+                            <TextBlock Text="Live View"  Width="59" Margin="-2,0,0,0" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Name="gridLiveView"  TextBlock.FontSize="13">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <lvc:CartesianChart Grid.Row="0">
+                            <lvc:CartesianChart.Series>
+                                <lvc:LineSeries Values="{Binding ChartValues}" PointGeometrySize="0" StrokeThickness="4" />
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
+                          MaxValue="{Binding AxisMax}" 
+                          MinValue="{Binding AxisMin}"
+                          DisableAnimations="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="{Binding AxisStep}"></lvc:Separator>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>
+                        <Button Grid.Row="1" Style="{StaticResource RoundButtonGrayTemplate}" Height="30" Click="RunDataOnClick">
+                            Inject/Stop Data
+                        </Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Name="TabReportServer" Style="{StaticResource DashboardSideBarStyle}">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Width="160">
+                            <Image Source="/Images/reportingSmall.png" Width="18" HorizontalAlignment="Left" Height="18" Margin="0,0,30,0"/>
+                            <TextBlock Text="Report"  />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <Button x:Name="btnRefresh" Style="{StaticResource HoverButton}" HorizontalAlignment="Left" ToolTip="Refresh"  VerticalAlignment="Bottom" Background="{x:Null}" BorderThickness="0" Click="btnRefresh_Click" Grid.Column="0" Margin="762,0,0,380" RenderTransformOrigin="0.386,0.853">
+                            <Image x:Name="imgRefresh" Source="/images/refresh-icon.png" Height="34" Width="44" RenderTransformOrigin="-4.57,-0.131"/>
+                        </Button>
+
+                        <DataGrid AlternatingRowBackground="#FFC4B0B0"  AutoGenerateColumns="False" Name="dgReport" Margin="10,114,10,73">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Binding="{Binding Path=ServerName}" Width="220" Header="Server Name">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path= MachineData}" Width="220" Header="Machine Data">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path= EntryDate}" Width="220" Header="Entry Date">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="btnExportExcel" Content="Export to Excel" Style="{StaticResource RoundButtonGrayTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="149" Margin="611,446,0,0" Height="36" FontSize="14" BorderBrush="White" FontFamily="Arial Black" />
+                        <Button x:Name="btnDailyReport" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Content="Daily Report" Style="{StaticResource RoundButtonGrayTemplate}" VerticalAlignment="Top" Width="153" Margin="73,42,0,0" Height="36" FontSize="14" BorderBrush="White" FontFamily="Arial Black"/>
+                        <Button x:Name="btnWeekReport" Content="Weekly Report" Style="{StaticResource RoundButtonGrayTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="153" Margin="337,43,0,0" Height="36" FontSize="14" BorderBrush="White" FontFamily="Arial Black" />
+                        <Button x:Name="btnMonthlyReport" Content="Monthly Report" Style="{StaticResource RoundButtonGrayTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="153" Margin="577,44,0,0" Height="36" FontSize="14" BorderBrush="White" FontFamily="Arial Black" />
+                    </Grid>
+
+                </TabItem>
+                <TabItem Name="configServer" HorizontalAlignment="Center" Style="{StaticResource DashboardSideBarStyle}">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Width="158">
+                            <Image Source="/Images/settingsSmall.png" Width="19" HorizontalAlignment="Center" Height="18" Margin="0,0,28,0"/>
+                            <TextBlock Text="Configuration"  Margin="0,0,0,0" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Label Content="Content goes here...Hello" />
+
+                </TabItem>
+                <TabItem  Name="helpuser" Style="{StaticResource DashboardSideBarStyle}">
+
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Width="155">
+                            <Image Source="/Images/question.png" Width="18" HorizontalAlignment="Left" Height="18" Margin="0,0,30,0"/>
+                            <TextBlock Text="Help" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid >
+                        
+                    </Grid>
+
+
+
+                </TabItem>
+            </TabControl>
+
+
+
+        </Grid>
+    </Grid>
+</Window>

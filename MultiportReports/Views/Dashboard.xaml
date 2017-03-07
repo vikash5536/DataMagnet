@@ -1,0 +1,377 @@
+﻿<Window x:Class="DataMagnetApp.Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:toggleSwitch="clr-namespace:ToggleSwitch;assembly=ToggleSwitch"
+        xmlns:ViewModel="clr-namespace:DataMagnetApp.ViewModel"
+        xmlns:control="clr-namespace:MultiSelectComboBox;assembly=MultiSelectComboBox"
+        Title="Dashboard" Height="360" Width="680"  WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded" BorderThickness="1" BorderBrush="#00416a"  ResizeMode="CanMinimize" >
+    <Window.Resources>
+        <ViewModel:CBViewModel x:Key="ViewModel"/>
+    </Window.Resources>
+    <Grid Name="GridContainer">
+        <Grid Name="GridDashbord" Visibility="Visible" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="680"  Margin="0,0,0,-130">
+            <Border BorderThickness="1" BorderBrush="#00416a" Height="10" VerticalAlignment="Top">
+                <Grid Name="TitleGrid" VerticalAlignment="Top" Background="#00416a" Height="10" Margin="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                </Grid>
+            </Border>
+            <Label x:Name="lbTitle" HorizontalAlignment="Left" Content="Dashboard" FontFamily="Verdana" FontSize="18" Margin="10,14,0,0" FontWeight="Bold" Width="142" Height="31" VerticalAlignment="Top"/>
+            <Button x:Name="btnDmin" TabIndex="7" Content="X" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="18" Height="22" Click="btnmin_Click" Margin="0,14,10,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+            <Button x:Name="btnDclose" TabIndex="7" Content="X" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="18" Height="22" Click="btnclose_Click" Margin="0,14,10,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+
+            <Button x:Name="btnServer"  ToolTip="Connected Servers" MouseLeave="btnServer_MouseLeave" Style="{StaticResource CircleRedButtonTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64" Margin="75,89,0,0" MouseEnter="btnServer_MouseEnter" RenderTransformOrigin="0,0" BorderThickness="0" Width="64" Click="btnServer_Click">
+                <Image x:Name="imgServer" Source="/images/weighing-w.png"  Height="28" Width="28"></Image>
+                <Button.ContextMenu>
+                    <ContextMenu Name="ServerContextMenu">
+                        <MenuItem Header="Start All Server" Name="MenuItemStartAllServer" Click="StartAllServer_Click" >
+                            <MenuItem.Icon>
+                                <Image Source="/images/playnormal.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Stop All Server" Name="StopAllServer" Click="StopAllServer_Click" >
+                            <MenuItem.Icon>
+                                <Image Source="/images/stopnormal.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem Header="View Server List">
+                            <MenuItem.Icon>
+                                <Image Source="/images/stopnormal.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button x:Name="btnMail" Style="{StaticResource CircleRedButtonTemplate}"  MouseLeave="btnMail_MouseLeave" ToolTip="Mail Notification" Height="64" Width="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="312,89,0,0" Click="btnMail_Click" MouseEnter="btnMail_MouseEnter" RenderTransformOrigin="0,0" BorderThickness="0">
+                <Image Name="imgMailNotify" Source="/images/email-w.png" Height="32" Width="32" ></Image>
+            </Button>
+            <Button x:Name="btnConfig" ToolTip="Configuration" Style="{StaticResource CircleRedButtonTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="btnConfig_MouseEnter" MouseLeave="btnConfig_MouseLeave"  Margin="312,212,304,84"  Click="btnConfig_Click" Height="64" Width="64">
+                <Image Name="imgConfig" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="32" Source="/images/settings-w.png"></Image>
+            </Button>
+            <Button x:Name="btnLogOut" ToolTip="Log Out" Style="{StaticResource CircleRedButtonTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="btnLogOut_MouseEnter" MouseLeave="btnLogOut_MouseLeave"  Margin="536,212,80,84"  Click="btnLogOut_Click"  Height="64" Width="64">
+                <Image Name="imgLogOut" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="32" Source="/images/logout-w.png"></Image>
+            </Button>
+
+            <Button x:Name="btnReports" ToolTip="Reports" Style="{StaticResource CircleRedButtonTemplate}" Click="btnReports_Click" MouseEnter="btnNotes_MouseEnter"  MouseLeave="btnNotes_MouseLeave" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Margin="536,89,0,0" Height="64" RenderTransformOrigin="0,0">
+                <Image Name="imgReport" Source="/images/report-w.png" Height="32" Width="32"></Image>
+            </Button>
+            <Button x:Name="btnUserList" Style="{StaticResource CircleRedButtonTemplate}" MouseEnter="btnUserList_MouseEnter" MouseLeave="btnUserList_MouseLeave" Click="btnUserList_Click" HorizontalAlignment="Left" ToolTip="User Profile" VerticalAlignment="Top" Margin="75,212,0,0" Height="64" Width="64">
+                <Image x:Name="imgUserProfile" Source="/images/avatar-w.png"  Height="32" Width="32"></Image>
+            </Button>
+            <Grid Margin="0,-1,0,1" >
+                <Label x:Name="lblStatus" Content=""  VerticalAlignment="Top" VerticalContentAlignment="Center" Height="22" FontSize="12" FontFamily="Verdana" Margin="-2,338,2,0"/>
+                <Label x:Name="lblVersion" Content="" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="22" FontSize="12" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Margin="10,338,-10,0"/>
+                <Image Height="20" Name="Status" Margin="54,341,607,-361" VerticalAlignment="Top" Grid.Row="2" />
+
+            </Grid>
+
+        </Grid>
+        <Grid Name="GridConfig" HorizontalAlignment="Left" Visibility="Hidden" Height="360" VerticalAlignment="Top" Width="680">
+            <StackPanel Panel.ZIndex="2" Name="pnlRightMenu" Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Margin="0,300,408,10">
+                <Grid Width="250">
+                    <Button x:Name="btnUserconfig" MouseEnter="btnUserconfig_MouseEnter" MouseLeave="btnUserconfig_MouseLeave" Style="{StaticResource CircleBlueButtonTemplate}" ToolTip="User Configuration" VerticalAlignment="Top" Margin="23,10,179,0" Width="36" Height="36" Click="btnUserconfig_Click">
+                        <Image x:Name="imgUserConfig" Source="/images/UserConfig.png" Height="28" Width="28"/>
+                    </Button>
+                    <Button x:Name="btnServerconfig" MouseEnter="btnServerconfig_MouseEnter" MouseLeave="btnServerconfig_MouseLeave" Style="{StaticResource CircleBlueButtonTemplate}" ToolTip="Server Configuration" Width="36" VerticalAlignment="Top" Margin="102,10,112,0" Height="36" Click="btnServerconfig_Click">
+                        <Image x:Name="imgServerConfig" Source="/images/ServerConfig.png" Height="28" Width="28"/>
+                    </Button>
+                    <Button x:Name="btnEmailconfig" Style="{StaticResource CircleBlueButtonTemplate}" ToolTip="Email Configuration" Width="36" VerticalAlignment="Top" Margin="186,10,28,0" Height="37" Click="btnEmailconfig_Click">
+                        <Image x:Name="imgeEmailConfig" Source="/images/mailConfig.png" Height="28" Width="28"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+            <Border BorderThickness="1" BorderBrush="#00416a" Height="10" VerticalAlignment="Top">
+                <Grid VerticalAlignment="Top" Background="#00416a" Height="10" Margin="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                </Grid>
+            </Border>
+            <Label HorizontalAlignment="Left" Content="Configurations" FontFamily="Verdana" FontSize="18" Margin="10,9,0,0" FontWeight="Bold" Width="169" Height="42" VerticalAlignment="Top"/>
+            <Button TabIndex="7" Content="&lt;" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="18" Height="29" Click="btnback_Click" Margin="0,11,10,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+            <Grid Name="GridServersConfig" Visibility="Hidden">
+                <toggleSwitch:HorizontalToggleSwitch Name="ServerConType" Unchecked="ServerConType_Unchecked" Checked="ServerConType_Checked" CheckedContent="Telnet" UncheckedContent="COM Port" Height="27" Width="108" Margin="534,55,38,278" ></toggleSwitch:HorizontalToggleSwitch>
+                <Grid Name="GridConfigCOM" Visibility="Hidden">
+                    <!--<TextBox x:Name="txtComServerName" Width="210" TabIndex="0" GotFocus="txtComServerName_GotFocus" LostFocus="txtComServerName_LostFocus"  Style="{StaticResource RoundTextboxTemplate}" Padding="4,4,2,4" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" FontFamily="Verdana" HorizontalAlignment="Left" Margin="36,94,0,0" />-->
+                    <Label Content="COM Port" Height="30" Margin="48,113,548,217"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="147,113,0,0" Height="30" Style="{StaticResource RoundComboTemplate}" VerticalAlignment="Top" Loaded="cmbPorts_Loaded" Name="cmbPorts" Width="100">
+                    </ComboBox>
+                    <Button x:Name="btnOpen" Style="{StaticResource RoundButtonBlueTemplate}" HorizontalAlignment="Left" Click="btnOpen_Click" Content="Open Port" VerticalAlignment="Top" Margin="36,223,0,0" FontWeight="Bold" FontFamily="Verdana" Width="210"  Height="30" BorderBrush="#FFAEABAB" />
+                    <TextBox  Name="_lblCOMPortLog" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Black" Foreground="White" Margin="287,94,36,106" />
+                    <ComboBox HorizontalAlignment="Left" Height="30" Margin="147,164,0,0" Style="{StaticResource ResourceKey=RoundComboTemplate}" VerticalAlignment="Top" x:Name="_cmbPorts_BoadRate" Width="99">
+                        <ComboBoxItem IsSelected="True">9600</ComboBoxItem>
+                        <ComboBoxItem>5600</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="Boad Rate" Height="30" Margin="48,164,548,166"/>
+                    <!--<ComboBox HorizontalAlignment="Left" Height="30" Margin="150,177,0,0" Style="{StaticResource ResourceKey=RoundComboTemplate}" VerticalAlignment="Top" x:Name="_cmbPorts_Parity" Width="97" RenderTransformOrigin="0.515,0.273">
+
+                </ComboBox>-->
+                </Grid>
+                <Grid Name="GridConfigTelnet" Visibility="Visible">
+                    <!--<TextBox x:Name="txtServerName" Width="213" TabIndex="0" GotFocus="txtServerName_GotFocus" BorderBrush="#12588A"  HorizontalAlignment="Left" LostFocus="txtServerName_LostFocus" Style="{StaticResource RoundTextboxTemplate}" Padding="4,4,2,4" TextWrapping="Wrap" VerticalAlignment="Top" Margin="36,94,0,0" FontSize="14" FontFamily="Verdana" />-->
+                    <TextBox x:Name="txtServerIP" Width="213" TabIndex="0" Text="192.168.1.15" BorderBrush="#12588A" GotFocus="txtServerIP_GotFocus" LostFocus="txtServerIP_LostFocus"  Style="{StaticResource RoundTextboxTemplate}" Padding="4,4,2,4" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,107,0,0" FontSize="14" FontFamily="Verdana" />
+                    <TextBox x:Name="txtServerPort" Width="213" TabIndex="0"  Text="8888" BorderBrush="#12588A" GotFocus="txtServerPort_GotFocus" LostFocus="txtServerPort_LostFocus"  Style="{StaticResource RoundTextboxTemplate}" Padding="4,4,2,4" TextWrapping="Wrap" VerticalAlignment="Top" Margin="36,158,0,0" HorizontalAlignment="Left" FontSize="14" FontFamily="Verdana" />
+                    <Button x:Name="btnTestTelnetConn" Style="{StaticResource RoundButtonBlueTemplate}" Content="Test Connection" VerticalAlignment="Top" Margin="36,215,0,0" Width="213" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Verdana" Click="btnTestTelnetConn_Click"  Height="30" BorderBrush="#FFAEABAB" />
+                    <TextBox  Name="_lbltelnetPortLog" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Black" Foreground="White" Margin="287,94,36,106" />
+                </Grid>
+            </Grid>
+            <Grid Name="GridEmailConfig" Visibility="Hidden">
+                <Button Height="20" Name="AddEMailConfig" Foreground="#12588A" Content="Add Email Config" Click="AddEMailConfig_Click" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,10,0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock TextDecorations="Underline">
+                <ContentPresenter />
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Foreground" Value="Blue" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <DataGrid x:Name="dgEmailConfiguration"  GridLinesVisibility="None" Visibility="Visible"  RowHeaderWidth="0"  Margin="10,76,10,57" AutoGenerateColumns="False"  HorizontalAlignment="Stretch" IsReadOnly="True" Background="White" BorderThickness="1" BorderBrush="#c4c4c4" SelectionUnit="FullRow" CellStyle="{StaticResource Body_Content_DataGrid_Centering}" >
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background"  Value="White" />
+                            <Setter Property="Margin" Value="-1,0,-1,0"></Setter>
+                            <Setter Property="BorderBrush" Value="#c4c4c4"/>
+                            <Setter Property="BorderThickness" Value="01,0,0,0"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="Padding" Value="10,5,5,5"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="EmailConfigId" Visibility="Hidden" Binding="{Binding Path=Id}"/>
+                        <DataGridTextColumn Header="EmailTemplateId" Visibility="Hidden" Binding="{Binding Path=EmailTemplateId}"/>
+                        <DataGridTextColumn Header="EmailPassword" Visibility="Hidden" Binding="{Binding Path=EmailPassword}"/>
+                        <DataGridTextColumn Header="SMTPAddress" Visibility="Hidden" Binding="{Binding Path=SMTPAddress}"/>
+                        <DataGridTextColumn Header="SMTPPort" Visibility="Hidden" Binding="{Binding Path=SMTPPort}"/>
+                        <DataGridTextColumn Header="EnableSSL" Visibility="Hidden" Binding="{Binding Path=EnableSSL}"/>
+                        <DataGridTextColumn Header="Name" MinWidth="100" Width="*" Binding="{Binding Path=EmailName}" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="EmailFrom" Width="*" MinWidth="80" Binding="{Binding Path=EmailFrom}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="EmailSubject" Width="*" MinWidth="170" Binding="{Binding Path=EmailSubject}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="EmailBody" Width="*" MinWidth="70"  Binding="{Binding Path=EmailBody}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="EntryDate" Width="*" MinWidth="70" Binding="{Binding Path=EntryDate}">
+                        </DataGridTextColumn>
+
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <ContextMenu x:Key="DataRowContextMenu">
+                            <MenuItem Header="Edit" Click="EditContext_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/Images/pencil.png" Height="16" Width="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Delete" Click="DeleteContext_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/Images/delete-button.png" Height="16" Width="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                        </ContextMenu>
+                    </DataGrid.Resources>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="ContextMenu" Value="{StaticResource DataRowContextMenu}" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="Email To: " FontWeight="Bold" Margin="10" TextTrimming="CharacterEllipsis">
+                                </TextBlock>
+                                <TextBlock Width="500" Text="{Binding EmailTo1}" TextWrapping="Wrap" Margin="10" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Width="500" Text="{Binding EmailTo1}" TextWrapping="Wrap" Margin="10" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </DataTemplate>
+
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </Grid>
+            <Grid Name="GridUserConfig" Visibility="Visible">
+                <Button x:Name="btnChangePassword" Style="{StaticResource RoundButtonBlueTemplate}" Content="Change Password" VerticalAlignment="Top" Margin="118,160,118,0" FontWeight="Bold" FontFamily="Verdana" Height="35" RenderTransformOrigin="0,0" BorderBrush="#FFAEABAB" Grid.Row="2" Click="btnChangePassword_Click"/>
+                <Button x:Name="btnChangeName" Style="{StaticResource RoundButtonBlueTemplate}" Content="Change User Name" VerticalAlignment="Top" Margin="118,100,118,0" FontWeight="Bold" FontFamily="Verdana" Height="35" RenderTransformOrigin="0,0" BorderBrush="#FFAEABAB" Grid.Row="2" Click="btnChangeName_Click"/>
+
+            </Grid>
+        </Grid>
+        <Grid Name="GridEmailHistory" Visibility="Hidden">
+            <Border BorderThickness="1" BorderBrush="#00416a" Height="10" VerticalAlignment="Top">
+                <Grid VerticalAlignment="Top" Background="#00416a" Height="10" Margin="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                </Grid>
+            </Border>
+            <Label HorizontalAlignment="Left" Content="Email History" FontFamily="Verdana" FontSize="18" Margin="10,9,0,0" FontWeight="Bold" Width="151" Height="31" VerticalAlignment="Top"/>
+            <Button TabIndex="7" Content="&lt;" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="20" Height="29" Click="btnback_Click" Margin="0,11,10,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+            <Label x:Name="lblSearchByEmailSubject" Content="Search By Email Subject" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" FontFamily="Verdana" FontSize="12" Margin="77,47,0,0" Width="170"/>
+            <TextBox Name="txtEmailFilter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" TextChanged="txtEmailFilter_TextChanged" Padding="2,4,0,0" Margin="252,47,0,0" />
+            <ListView Margin="10,80,10,10" Name="lvDataBinding">
+                <ListView.View >
+                    <GridView >
+                        <GridViewColumn Width="240" Header="Email Details">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Top">
+                                      <Run Text="Time: "/>
+                                    <Run Text="{Binding EntryDate}" FontWeight="Bold"/>
+                                     <LineBreak></LineBreak>
+                                      <Run Text="Email from: "/>
+                                    <Run Text="{Binding EmailFrom}" FontWeight="Bold"/>
+                                     <LineBreak></LineBreak>
+                                      <Run Text="Email to: "/>
+                                    <Run Text="{Binding EmailTo}" FontWeight="Bold"/>
+                                    <LineBreak></LineBreak>
+                                      <Run Text="Email To1: "/><Run Text="{Binding EmailTo1}" FontWeight="Bold"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn  Header="Email Content" Width="380">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Top">
+                                     <Run Text="Email Subject: "/>
+                                    <Run Text="{Binding EmailSubject}" FontWeight="Bold"/>
+                                     <LineBreak></LineBreak>
+                                      <Run Text="Email Body: "/>
+                                    <Run Text="{Binding EmailBody}" FontWeight="Bold"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name,StringFormat= Date :{0:yyyy-MM-dd}}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+
+            </ListView>
+        </Grid>
+        <Grid Name="GridReports" Visibility="Hidden">
+            <Border BorderThickness="1" BorderBrush="#00416a" Height="10" VerticalAlignment="Top">
+                <Grid VerticalAlignment="Top" Background="#00416a" Height="10" Margin="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                </Grid>
+            </Border>
+            <Label HorizontalAlignment="Left" Content="Reports" FontFamily="Verdana" FontSize="18" Margin="10,9,0,0" FontWeight="Bold" Width="142" Height="31" VerticalAlignment="Top"/>
+            <Button TabIndex="7" Content="&lt;" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="18" Height="29" Click="btnback_Click" Margin="0,11,10,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+            <DataGrid GridLinesVisibility="None"  RowHeaderWidth="0" CellStyle="{StaticResource Body_Content_DataGrid_Centering}" AutoGenerateColumns="False" Name="dgReport" Margin="10,45,10,10" IsReadOnly="True" Background="White" BorderThickness="1" BorderBrush="#c4c4c4" SelectionUnit="FullRow">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background"  Value="White" />
+                        <Setter Property="Margin" Value="-1,0,-1,0"></Setter>
+                        <Setter Property="BorderBrush" Value="#c4c4c4"/>
+                        <Setter Property="BorderThickness" Value="01,0,0,0"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="Padding" Value="10,2,2,2"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Binding="{Binding Path=MachineName}" MinWidth="190" Width="*" Header="Server Name">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path= MachineData}" MinWidth="190" Width="*" Header="Machine Data">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path= EntryDate}" MinWidth="190" Width="*" Header="Entry Date">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Name="GridUserList" Visibility="Hidden" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="680"  Margin="0,0,0,-130">
+            <Border BorderThickness="1" BorderBrush="#00416a" Height="10" VerticalAlignment="Top">
+                <Grid VerticalAlignment="Top" Background="#00416a" Height="10" Margin="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                </Grid>
+            </Border>
+            <Label HorizontalAlignment="Left" Content="Users List" FontFamily="Verdana" FontSize="18" Margin="10,9,0,0" FontWeight="Bold" Width="142" Height="31" VerticalAlignment="Top"/>
+            <Button TabIndex="7" Content="&lt;" Style="{StaticResource HoverButton}" Foreground="Black"  HorizontalAlignment="Right" Width="18" Height="29" Click="btnback_Click" Margin="0,11,10,0" FontSize="22" BorderBrush="White" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" VerticalAlignment="Top"/>
+            <DataGrid x:Name="dgUserList"  GridLinesVisibility="None" ItemsSource="{Binding Path=LoadUserDetail}" MouseDoubleClick="dgUserList_MouseDoubleClick" Visibility="Visible"  RowHeaderWidth="0" SelectionChanged="dgUserList_SelectionChanged" Margin="10,43,10,57" AutoGenerateColumns="False"  HorizontalAlignment="Stretch" IsReadOnly="True" Background="White" BorderThickness="1" BorderBrush="#c4c4c4" SelectionUnit="FullRow" CellStyle="{StaticResource Body_Content_DataGrid_Centering}" >
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background"  Value="White" />
+                            <Setter Property="Margin" Value="-1,0,-1,0"></Setter>
+                            <Setter Property="BorderBrush" Value="#c4c4c4"/>
+                            <Setter Property="BorderThickness" Value="01,0,0,0"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="Padding" Value="10,5,5,5"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="User Id" Visibility="Hidden" Binding="{Binding Path=UserId}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Full Name" MinWidth="100" Width="*" Binding="{Binding Path=FullName}" >
+
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="Margin" Value="0,0,-1,0"></Setter>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Designation" Width="*" MinWidth="80" Binding="{Binding Path=Designation}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Email" Width="*" MinWidth="170" Binding="{Binding Path=Email}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Mobile" Width="*" MinWidth="70"  Binding="{Binding Path=Mobile}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="UserName" Width="*" MinWidth="70" Binding="{Binding Path=UserName}">
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="161" Margin="0,0,0,-10">
+                <Button Name="btnAddUser" Style="{StaticResource CircleBlueButtonTemplate}" Click="btnAddUser_Click" Margin="20,0,0,22" ToolTip="Create User" BorderThickness="0" Height="25" Width="25" Background="Transparent" VerticalAlignment="Bottom">
+                    <Image Source="/Images/Add.png"></Image>
+                </Button>
+                <Button Name="btnEditUser" Style="{StaticResource CircleBlueButtonTemplate}" Click="btnEditUser_Click" ToolTip="Edit User" IsEnabled="False" BorderThickness="0" Width="25" Height="25" Margin="20,0,0,22" Background="Transparent" VerticalAlignment="Bottom" >
+                    <Image x:Name="ImageEditUser" Source="/Images/EditOff.png"></Image>
+                </Button>
+                <Button Name="btnDeleteUser" Style="{StaticResource CircleBlueButtonTemplate}" Click="btnDeleteUser_Click" ToolTip="Delete User" IsEnabled="False" BorderThickness="0" Width="25" Height="25" Margin="20,0,0,22" Background="Transparent" VerticalAlignment="Bottom" >
+                    <Image x:Name="ImageDeleteUser" Source="/Images/DeleteOff.png"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

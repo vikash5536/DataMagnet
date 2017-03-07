@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagnet", "MultiportReports\DataMagnet.csproj", "{362698E5-4CEC-40FC-8776-01D77D59F0CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6E69B0E8-721E-48F3-9753-1F8E8A3A8E1F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutiThreadServer", "MutiThreadServer\MutiThreadServer.csproj", "{C5A15353-84F4-4795-8884-5F5C765DAA34}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "DataMagnet_Setup", "MultiportReports_Setup\DataMagnet_Setup.wixproj", "{C6BF551B-2460-475B-9B16-9D61AD726F25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAction", "MultiportReports_CustomAction\CustomAction.csproj", "{8790176C-09D7-4CB7-903E-31C08D949240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureApp", "..\..\..\..\Downloads\Make Your Application with Trial Version\SecureApp\SecureApp\SecureApp.csproj", "{567DAB27-241C-4E6C-B2FA-66D9D64081FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{362698E5-4CEC-40FC-8776-01D77D59F0CC}.Release|x86.Build.0 = Release|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Debug|x86.Build.0 = Debug|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Release|x86.ActiveCfg = Release|Any CPU
+		{C5A15353-84F4-4795-8884-5F5C765DAA34}.Release|x86.Build.0 = Release|Any CPU
+		{C6BF551B-2460-475B-9B16-9D61AD726F25}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C6BF551B-2460-475B-9B16-9D61AD726F25}.Debug|x86.ActiveCfg = Debug|x86
+		{C6BF551B-2460-475B-9B16-9D61AD726F25}.Debug|x86.Build.0 = Debug|x86
+		{C6BF551B-2460-475B-9B16-9D61AD726F25}.Release|Any CPU.ActiveCfg = Release|x86
+		{C6BF551B-2460-475B-9B16-9D61AD726F25}.Release|x86.ActiveCfg = Release|x86
+		{C6BF551B-2460-475B-9B16-9D61AD726F25}.Release|x86.Build.0 = Release|x86
+		{8790176C-09D7-4CB7-903E-31C08D949240}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8790176C-09D7-4CB7-903E-31C08D949240}.Debug|x86.ActiveCfg = Debug|x86
+		{8790176C-09D7-4CB7-903E-31C08D949240}.Debug|x86.Build.0 = Debug|x86
+		{8790176C-09D7-4CB7-903E-31C08D949240}.Release|Any CPU.ActiveCfg = Release|x86
+		{8790176C-09D7-4CB7-903E-31C08D949240}.Release|x86.ActiveCfg = Release|x86
+		{8790176C-09D7-4CB7-903E-31C08D949240}.Release|x86.Build.0 = Release|x86
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{567DAB27-241C-4E6C-B2FA-66D9D64081FB}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
